@@ -2,6 +2,8 @@
 // These views may contain a “view controller” themselves,
 // But that is still considered part of the view application tier.
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:guest_profile_demo/global/constants/app_asset.dart';
@@ -22,6 +24,7 @@ class HomeView extends GetWidget<HomeController> {
     return GetBuilder<HomeController>(
       init: HomeController(),
       builder: (controller) {
+        log("======== screen size ==== ${MediaQuery.sizeOf(context).width}");
         if (MediaQuery.sizeOf(context).width >= 940) {
           if (controller.key.currentState != null) {
             if (controller.key.currentState!.isDrawerOpen) {
@@ -34,8 +37,7 @@ class HomeView extends GetWidget<HomeController> {
             key: controller.key,
             drawer: guestListView(controller, context),
             backgroundColor: AppColor.greyF8F8F8,
-            body:
-                buildStack(controller, context),
+            body: buildStack(controller, context),
           ),
         );
       },
@@ -73,8 +75,8 @@ class HomeView extends GetWidget<HomeController> {
                         child: Container(
                           padding: EdgeInsets.only(
                             top: MySize.getScaledSizeHeight(19),
-                            left: MySize.getScaledSizeWidth(29),
-                            right: MySize.getScaledSizeWidth(27),
+                            left: MySize.getScaledSizeHeight(29),
+                            right: MySize.getScaledSizeHeight(27),
                           ),
                           decoration: const BoxDecoration(
                             border: Border(
@@ -107,13 +109,13 @@ class HomeView extends GetWidget<HomeController> {
                                                   MySize.getScaledSizeHeight(
                                                 15,
                                               ),
-                                              width: MySize.getScaledSizeWidth(
+                                              width: MySize.getScaledSizeHeight(
                                                 15,
                                               ),
                                               fit: BoxFit.contain,
                                             ),
                                             SizedBox(
-                                              width: MySize.getScaledSizeWidth(
+                                              width: MySize.getScaledSizeHeight(
                                                 6,
                                               ),
                                             ),
@@ -122,7 +124,7 @@ class HomeView extends GetWidget<HomeController> {
                                               style:
                                                   AppTextStyle.medium.copyWith(
                                                 fontSize:
-                                                    MySize.getScaledSizeWidth(
+                                                    MySize.getScaledSizeHeight(
                                                   22,
                                                 ),
                                                 color: AppColor.grey666666,
@@ -136,16 +138,16 @@ class HomeView extends GetWidget<HomeController> {
                               Container(
                                 padding: EdgeInsets.symmetric(
                                   vertical: MySize.getScaledSizeHeight(6),
-                                  horizontal: MySize.getScaledSizeWidth(48.5),
+                                  horizontal: MySize.getScaledSizeHeight(48.5),
                                 ),
                                 decoration: BoxDecoration(
                                   color: AppColor.white,
                                   borderRadius: BorderRadius.only(
                                     topRight: Radius.circular(
-                                      MySize.getScaledSizeWidth(12),
+                                      MySize.getScaledSizeHeight(12),
                                     ),
                                     topLeft: Radius.circular(
-                                      MySize.getScaledSizeWidth(12),
+                                      MySize.getScaledSizeHeight(12),
                                     ),
                                   ),
                                 ),
@@ -158,7 +160,7 @@ class HomeView extends GetWidget<HomeController> {
                                       child: Image.asset(
                                         AppAsset.guestBookIcon,
                                         height: MySize.getScaledSizeHeight(45),
-                                        width: MySize.getScaledSizeWidth(36),
+                                        width: MySize.getScaledSizeHeight(36),
                                         fit: BoxFit.contain,
                                       ),
                                     ),
@@ -171,7 +173,7 @@ class HomeView extends GetWidget<HomeController> {
                                         AppString.guestBook,
                                         style: AppTextStyle.semiBold.copyWith(
                                           fontSize:
-                                              MySize.getScaledSizeWidth(16),
+                                              MySize.getScaledSizeHeight(16),
                                           color: AppColor.black212121,
                                         ),
                                       ),
@@ -180,7 +182,8 @@ class HomeView extends GetWidget<HomeController> {
                                       AppString.guestDescription,
                                       textAlign: TextAlign.center,
                                       style: AppTextStyle.regular.copyWith(
-                                        fontSize: MySize.getScaledSizeWidth(16),
+                                        fontSize:
+                                            MySize.getScaledSizeHeight(16),
                                         color: AppColor.black44474E,
                                       ),
                                     ),
@@ -193,15 +196,15 @@ class HomeView extends GetWidget<HomeController> {
                                     top: MySize.getScaledSizeHeight(20),
                                     bottom: MySize.getScaledSizeHeight(18),
                                   ),
-                                  height: MySize.getScaledSizeHeight(44),
+                                  height: MySize.getScaledSizeHeight(48),
                                   padding: EdgeInsets.symmetric(
                                     vertical: MySize.getScaledSizeHeight(6),
-                                    horizontal: MySize.getScaledSizeWidth(8),
+                                    horizontal: MySize.getScaledSizeHeight(8),
                                   ),
                                   decoration: BoxDecoration(
                                     color: AppColor.white,
                                     borderRadius: BorderRadius.circular(
-                                      MySize.getScaledSizeWidth(12),
+                                      MySize.getScaledSizeHeight(12),
                                     ),
                                   ),
                                   child: ListView.builder(
@@ -216,19 +219,19 @@ class HomeView extends GetWidget<HomeController> {
                                         },
                                         child: Container(
                                           margin: EdgeInsets.only(
-                                            left: MySize.getScaledSizeWidth(
+                                            left: MySize.getScaledSizeHeight(
                                                 index == 0 ? 8 : 0),
-                                            right: MySize.getScaledSizeWidth(8),
+                                            right: MySize.getScaledSizeHeight(8),
                                           ),
                                           padding: EdgeInsets.symmetric(
                                             vertical:
                                                 MySize.getScaledSizeHeight(6),
                                             horizontal:
-                                                MySize.getScaledSizeWidth(16),
+                                                MySize.getScaledSizeHeight(16),
                                           ),
                                           decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(
-                                              MySize.getScaledSizeWidth(8),
+                                              MySize.getScaledSizeHeight(8),
                                             ),
                                             color: controller.tabIndex.value ==
                                                     index
@@ -239,7 +242,8 @@ class HomeView extends GetWidget<HomeController> {
                                             controller.optionList[index],
                                             style: AppTextStyle.medium.copyWith(
                                               fontSize:
-                                                  MySize.getScaledSizeWidth(16),
+                                                  MySize.getScaledSizeHeight(
+                                                      16),
                                               color:
                                                   controller.tabIndex.value ==
                                                           index
@@ -261,19 +265,19 @@ class HomeView extends GetWidget<HomeController> {
                                 child: Text(
                                   AppString.allergies,
                                   style: AppTextStyle.medium.copyWith(
-                                    fontSize: MySize.getScaledSizeWidth(16),
+                                    fontSize: MySize.getScaledSizeHeight(16),
                                     color: AppColor.grey85858B,
                                   ),
                                 ),
                               ),
                               Container(
                                 padding: EdgeInsets.all(
-                                  MySize.getScaledSizeWidth(26),
+                                  MySize.getScaledSizeHeight(26),
                                 ),
                                 decoration: BoxDecoration(
                                   color: AppColor.white,
                                   borderRadius: BorderRadius.circular(
-                                    MySize.getScaledSizeWidth(10),
+                                    MySize.getScaledSizeHeight(10),
                                   ),
                                 ),
                                 child: Row(
@@ -286,14 +290,14 @@ class HomeView extends GetWidget<HomeController> {
                                           AppAsset.allergiesIcon,
                                           height:
                                               MySize.getScaledSizeHeight(32),
-                                          width: MySize.getScaledSizeWidth(32),
+                                          width: MySize.getScaledSizeHeight(32),
                                           fit: BoxFit.contain,
                                         ),
                                         Padding(
                                           padding: EdgeInsets.only(
-                                            left: MySize.getScaledSizeWidth(25),
+                                            left: MySize.getScaledSizeHeight(25),
                                             right:
-                                                MySize.getScaledSizeWidth(20),
+                                                MySize.getScaledSizeHeight(20),
                                           ),
                                           child: SizedBox(
                                             height:
@@ -307,7 +311,7 @@ class HomeView extends GetWidget<HomeController> {
                                           AppString.noAllergies,
                                           style: AppTextStyle.semiBold.copyWith(
                                             fontSize:
-                                                MySize.getScaledSizeWidth(14),
+                                                MySize.getScaledSizeHeight(14),
                                             color: AppColor.black212121,
                                           ),
                                         ),
@@ -316,13 +320,13 @@ class HomeView extends GetWidget<HomeController> {
                                     Container(
                                       padding: EdgeInsets.symmetric(
                                         horizontal:
-                                            MySize.getScaledSizeWidth(16),
+                                            MySize.getScaledSizeHeight(16),
                                         vertical:
                                             MySize.getScaledSizeHeight(12),
                                       ),
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(
-                                          MySize.getScaledSizeWidth(28),
+                                          MySize.getScaledSizeHeight(28),
                                         ),
                                         color: AppColor.black212121,
                                       ),
@@ -330,7 +334,7 @@ class HomeView extends GetWidget<HomeController> {
                                         AppString.add,
                                         style: AppTextStyle.medium.copyWith(
                                           fontSize:
-                                              MySize.getScaledSizeWidth(14),
+                                              MySize.getScaledSizeHeight(14),
                                           color: AppColor.white,
                                         ),
                                       ),
@@ -345,24 +349,24 @@ class HomeView extends GetWidget<HomeController> {
                                 child: Text(
                                   AppString.upcomingVisits,
                                   style: AppTextStyle.medium.copyWith(
-                                    fontSize: MySize.getScaledSizeWidth(16),
+                                    fontSize: MySize.getScaledSizeHeight(16),
                                     color: AppColor.grey85858B,
                                   ),
                                 ),
                               ),
                               Container(
                                 padding: EdgeInsets.all(
-                                  MySize.getScaledSizeWidth(26),
+                                  MySize.getScaledSizeHeight(26),
                                 ),
                                 decoration: BoxDecoration(
                                   color: AppColor.white,
                                   borderRadius: BorderRadius.circular(
-                                    MySize.getScaledSizeWidth(10),
+                                    MySize.getScaledSizeHeight(10),
                                   ),
                                 ),
                                 child: Row(
                                   mainAxisAlignment:
-                                      MediaQuery.sizeOf(context).width <= 518
+                                      MediaQuery.sizeOf(context).width <= 800
                                           ? MainAxisAlignment.start
                                           : MainAxisAlignment.spaceBetween,
                                   children: [
@@ -372,14 +376,14 @@ class HomeView extends GetWidget<HomeController> {
                                           AppAsset.upcomingVisitsIcon,
                                           height:
                                               MySize.getScaledSizeHeight(32),
-                                          width: MySize.getScaledSizeWidth(32),
+                                          width: MySize.getScaledSizeHeight(32),
                                           fit: BoxFit.contain,
                                         ),
                                         Padding(
                                           padding: EdgeInsets.only(
-                                            left: MySize.getScaledSizeWidth(25),
+                                            left: MySize.getScaledSizeHeight(25),
                                             right:
-                                                MySize.getScaledSizeWidth(20),
+                                                MySize.getScaledSizeHeight(20),
                                           ),
                                           child: SizedBox(
                                             height:
@@ -389,21 +393,20 @@ class HomeView extends GetWidget<HomeController> {
                                             ),
                                           ),
                                         ),
-                                        MediaQuery.sizeOf(context).width <= 518
+                                        MediaQuery.sizeOf(context).width <= 800
                                             ? const SizedBox()
                                             : Text(
                                                 AppString.noUpcomingVisits,
                                                 style: AppTextStyle.semiBold
                                                     .copyWith(
-                                                  fontSize:
-                                                      MySize.getScaledSizeWidth(
-                                                          14),
+                                                  fontSize: MySize
+                                                      .getScaledSizeHeight(14),
                                                   color: AppColor.black212121,
                                                 ),
                                               ),
                                       ],
                                     ),
-                                    MediaQuery.sizeOf(context).width <= 518
+                                    MediaQuery.sizeOf(context).width <= 800
                                         ? Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -412,9 +415,8 @@ class HomeView extends GetWidget<HomeController> {
                                                 AppString.noUpcomingVisits,
                                                 style: AppTextStyle.semiBold
                                                     .copyWith(
-                                                  fontSize:
-                                                      MySize.getScaledSizeWidth(
-                                                          14),
+                                                  fontSize: MySize
+                                                      .getScaledSizeHeight(14),
                                                   color: AppColor.black212121,
                                                 ),
                                               ),
@@ -425,7 +427,7 @@ class HomeView extends GetWidget<HomeController> {
                                                 ),
                                                 padding: EdgeInsets.symmetric(
                                                   horizontal:
-                                                      MySize.getScaledSizeWidth(
+                                                      MySize.getScaledSizeHeight(
                                                           16),
                                                   vertical: MySize
                                                       .getScaledSizeHeight(12),
@@ -433,7 +435,7 @@ class HomeView extends GetWidget<HomeController> {
                                                 decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(
-                                                    MySize.getScaledSizeWidth(
+                                                    MySize.getScaledSizeHeight(
                                                         28),
                                                   ),
                                                   color: AppColor.black212121,
@@ -443,7 +445,8 @@ class HomeView extends GetWidget<HomeController> {
                                                   style: AppTextStyle.medium
                                                       .copyWith(
                                                     fontSize: MySize
-                                                        .getScaledSizeWidth(14),
+                                                        .getScaledSizeHeight(
+                                                            14),
                                                     color: AppColor.white,
                                                   ),
                                                 ),
@@ -453,7 +456,7 @@ class HomeView extends GetWidget<HomeController> {
                                         : Container(
                                             padding: EdgeInsets.symmetric(
                                               horizontal:
-                                                  MySize.getScaledSizeWidth(16),
+                                                  MySize.getScaledSizeHeight(16),
                                               vertical:
                                                   MySize.getScaledSizeHeight(
                                                       12),
@@ -461,7 +464,7 @@ class HomeView extends GetWidget<HomeController> {
                                             decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(
-                                                MySize.getScaledSizeWidth(28),
+                                                MySize.getScaledSizeHeight(28),
                                               ),
                                               color: AppColor.black212121,
                                             ),
@@ -470,7 +473,7 @@ class HomeView extends GetWidget<HomeController> {
                                               style:
                                                   AppTextStyle.medium.copyWith(
                                                 fontSize:
-                                                    MySize.getScaledSizeWidth(
+                                                    MySize.getScaledSizeHeight(
                                                         14),
                                                 color: AppColor.white,
                                               ),
@@ -486,19 +489,19 @@ class HomeView extends GetWidget<HomeController> {
                                 child: Text(
                                   AppString.notes,
                                   style: AppTextStyle.medium.copyWith(
-                                    fontSize: MySize.getScaledSizeWidth(16),
+                                    fontSize: MySize.getScaledSizeHeight(16),
                                     color: AppColor.grey85858B,
                                   ),
                                 ),
                               ),
                               Container(
                                 padding: EdgeInsets.all(
-                                  MySize.getScaledSizeWidth(26),
+                                  MySize.getScaledSizeHeight(26),
                                 ),
                                 decoration: BoxDecoration(
                                   color: AppColor.white,
                                   borderRadius: BorderRadius.circular(
-                                    MySize.getScaledSizeWidth(10),
+                                    MySize.getScaledSizeHeight(10),
                                   ),
                                 ),
                                 child: Column(
@@ -524,19 +527,19 @@ class HomeView extends GetWidget<HomeController> {
                                 child: Text(
                                   AppString.recentOrders,
                                   style: AppTextStyle.medium.copyWith(
-                                    fontSize: MySize.getScaledSizeWidth(16),
+                                    fontSize: MySize.getScaledSizeHeight(16),
                                     color: AppColor.grey85858B,
                                   ),
                                 ),
                               ),
                               Container(
                                 padding: EdgeInsets.all(
-                                  MySize.getScaledSizeWidth(26),
+                                  MySize.getScaledSizeHeight(26),
                                 ),
                                 decoration: BoxDecoration(
                                   color: AppColor.white,
                                   borderRadius: BorderRadius.circular(
-                                    MySize.getScaledSizeWidth(10),
+                                    MySize.getScaledSizeHeight(10),
                                   ),
                                 ),
                                 child: Row(
@@ -544,13 +547,13 @@ class HomeView extends GetWidget<HomeController> {
                                     Image.asset(
                                       AppAsset.recentOrders,
                                       height: MySize.getScaledSizeHeight(32),
-                                      width: MySize.getScaledSizeWidth(32),
+                                      width: MySize.getScaledSizeHeight(32),
                                       fit: BoxFit.contain,
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(
-                                        left: MySize.getScaledSizeWidth(25),
-                                        right: MySize.getScaledSizeWidth(20),
+                                        left: MySize.getScaledSizeHeight(25),
+                                        right: MySize.getScaledSizeHeight(20),
                                       ),
                                       child: SizedBox(
                                         height: MySize.getScaledSizeHeight(64),
@@ -564,7 +567,7 @@ class HomeView extends GetWidget<HomeController> {
                                         AppString.noRecentOrdersToShow,
                                         style: AppTextStyle.semiBold.copyWith(
                                           fontSize:
-                                              MySize.getScaledSizeWidth(14),
+                                              MySize.getScaledSizeHeight(14),
                                           color: AppColor.black212121,
                                         ),
                                       ),
@@ -579,7 +582,7 @@ class HomeView extends GetWidget<HomeController> {
                                 child: Text(
                                   AppString.onlineReviews,
                                   style: AppTextStyle.medium.copyWith(
-                                    fontSize: MySize.getScaledSizeWidth(16),
+                                    fontSize: MySize.getScaledSizeHeight(16),
                                     color: AppColor.grey85858B,
                                   ),
                                 ),
@@ -591,14 +594,14 @@ class HomeView extends GetWidget<HomeController> {
                                 ),
                                 height: MySize.getScaledSizeHeight(228),
                                 // padding: EdgeInsets.all(
-                                //   MySize.getScaledSizeWidth(20),
+                                //   MySize.getScaledSizeHeight(20),
                                 // ),
                                 decoration: BoxDecoration(
                                   border:
                                       Border.all(color: AppColor.greyE5E5E5),
                                   color: AppColor.white,
                                   borderRadius: BorderRadius.circular(
-                                    MySize.getScaledSizeWidth(16),
+                                    MySize.getScaledSizeHeight(16),
                                   ),
                                 ),
                                 child: ListView.builder(
@@ -606,8 +609,8 @@ class HomeView extends GetWidget<HomeController> {
                                   scrollDirection: Axis.horizontal,
                                   shrinkWrap: true,
                                   padding: EdgeInsets.only(
-                                    left: MySize.getScaledSizeWidth(20),
-                                    right: MySize.getScaledSizeWidth(20),
+                                    left: MySize.getScaledSizeHeight(20),
+                                    right: MySize.getScaledSizeHeight(20),
                                     bottom: MySize.getScaledSizeHeight(20),
                                     top: MySize.getScaledSizeHeight(10),
                                   ),
@@ -619,21 +622,21 @@ class HomeView extends GetWidget<HomeController> {
                                       children: [
                                         // Review Card Container
                                         Container(
-                                          width: MySize.getScaledSizeWidth(241),
+                                          width: MySize.getScaledSizeHeight(241),
                                           margin: EdgeInsets.only(
-                                            left: MySize.getScaledSizeWidth(
+                                            left: MySize.getScaledSizeHeight(
                                                 index == 0 ? 0 : 20),
                                             top: MySize.getScaledSizeHeight(
                                                 24), // leave space for the logo
                                           ),
                                           padding: EdgeInsets.all(
-                                              MySize.getScaledSizeWidth(16)),
+                                              MySize.getScaledSizeHeight(16)),
                                           decoration: BoxDecoration(
                                             border: Border.all(
                                                 color: AppColor.greyE5E5E5),
                                             color: AppColor.white,
                                             borderRadius: BorderRadius.circular(
-                                                MySize.getScaledSizeWidth(16)),
+                                                MySize.getScaledSizeHeight(16)),
                                           ),
                                           child: Column(
                                             children: [
@@ -647,7 +650,7 @@ class HomeView extends GetWidget<HomeController> {
                                                   height: MySize
                                                       .getScaledSizeHeight(20),
                                                   width:
-                                                      MySize.getScaledSizeWidth(
+                                                      MySize.getScaledSizeHeight(
                                                           100),
                                                   fit: BoxFit.contain,
                                                 ),
@@ -657,9 +660,8 @@ class HomeView extends GetWidget<HomeController> {
                                                 textAlign: TextAlign.center,
                                                 style: AppTextStyle.semiBold
                                                     .copyWith(
-                                                  fontSize:
-                                                      MySize.getScaledSizeWidth(
-                                                          14),
+                                                  fontSize: MySize
+                                                      .getScaledSizeHeight(14),
                                                   color: AppColor.grey666666,
                                                 ),
                                               ),
@@ -674,7 +676,7 @@ class HomeView extends GetWidget<HomeController> {
                                             height:
                                                 MySize.getScaledSizeHeight(48),
                                             width:
-                                                MySize.getScaledSizeWidth(48),
+                                                MySize.getScaledSizeHeight(48),
                                             decoration: const BoxDecoration(
                                               color: AppColor.white,
                                               shape: BoxShape.circle,
@@ -701,7 +703,7 @@ class HomeView extends GetWidget<HomeController> {
             ),
           ],
         ),
-        MediaQuery.sizeOf(context).width <= 700
+        MediaQuery.sizeOf(context).width <= 800
             ? const SizedBox()
             : Container(
                 margin: EdgeInsets.only(
@@ -711,7 +713,7 @@ class HomeView extends GetWidget<HomeController> {
                   bottom: MySize.getScaledSizeHeight(13.43),
                 ),
                 height: MySize.getScaledSizeHeight(25),
-                width: MySize.getScaledSizeWidth(200),
+                width: MySize.getScaledSizeHeight(200),
                 decoration: BoxDecoration(
                   color: Colors.black,
                   borderRadius: BorderRadius.only(
@@ -726,7 +728,7 @@ class HomeView extends GetWidget<HomeController> {
                 child: Image.asset(
                   AppAsset.arrowDownIcon,
                   height: MySize.getScaledSizeHeight(23.03),
-                  width: MySize.getScaledSizeWidth(14),
+                  width: MySize.getScaledSizeHeight(14),
                   fit: BoxFit.contain,
                 ),
               ),
@@ -735,17 +737,17 @@ class HomeView extends GetWidget<HomeController> {
   }
 
   guestListView(HomeController controller, context) {
-    return MediaQuery.sizeOf(context).width <= 450
+    return MediaQuery.sizeOf(context).width <= 800
         ? Container(
             margin: EdgeInsets.only(
-              right: MySize.getScaledSizeWidth(28),
+              right: MySize.getScaledSizeHeight(28),
             ),
             color: AppColor.white,
-            // width: MySize.getScaledSizeWidth(350),
+            // width: MySize.getScaledSizeHeight(350),
             padding: EdgeInsets.only(
               top: MySize.getScaledSizeHeight(37),
-              left: MySize.getScaledSizeWidth(28),
-              right: MySize.getScaledSizeWidth(28),
+              left: MySize.getScaledSizeHeight(28),
+              right: MySize.getScaledSizeHeight(28),
             ),
             child: Column(
               children: [
@@ -759,12 +761,12 @@ class HomeView extends GetWidget<HomeController> {
                     height: MySize.getScaledSizeHeight(44),
                     padding: EdgeInsets.symmetric(
                       vertical: MySize.getScaledSizeHeight(6),
-                      horizontal: MySize.getScaledSizeWidth(8),
+                      horizontal: MySize.getScaledSizeHeight(8),
                     ),
                     decoration: BoxDecoration(
                       color: AppColor.black,
                       borderRadius: BorderRadius.circular(
-                        MySize.getScaledSizeWidth(5),
+                        MySize.getScaledSizeHeight(5),
                       ),
                     ),
                     child: Row(
@@ -773,7 +775,7 @@ class HomeView extends GetWidget<HomeController> {
                           Image.asset(
                             AppAsset.drawer1,
                             height: MySize.getScaledSizeHeight(20.33),
-                            width: MySize.getScaledSizeWidth(49.28),
+                            width: MySize.getScaledSizeHeight(49.28),
                             fit: BoxFit.contain,
                           ),
                         ),
@@ -784,7 +786,7 @@ class HomeView extends GetWidget<HomeController> {
                           Image.asset(
                             AppAsset.drawer2,
                             height: MySize.getScaledSizeHeight(36.37),
-                            width: MySize.getScaledSizeWidth(40),
+                            width: MySize.getScaledSizeHeight(40),
                             fit: BoxFit.contain,
                           ),
                         ),
@@ -795,7 +797,7 @@ class HomeView extends GetWidget<HomeController> {
                           Image.asset(
                             AppAsset.drawer3,
                             height: MySize.getScaledSizeHeight(40),
-                            width: MySize.getScaledSizeWidth(40),
+                            width: MySize.getScaledSizeHeight(40),
                             fit: BoxFit.contain,
                           ),
                         ),
@@ -806,7 +808,7 @@ class HomeView extends GetWidget<HomeController> {
                           Image.asset(
                             AppAsset.drawer4,
                             height: MySize.getScaledSizeHeight(32.66),
-                            width: MySize.getScaledSizeWidth(40),
+                            width: MySize.getScaledSizeHeight(40),
                             fit: BoxFit.contain,
                           ),
                         ),
@@ -817,7 +819,7 @@ class HomeView extends GetWidget<HomeController> {
                           Image.asset(
                             AppAsset.drawer5,
                             height: MySize.getScaledSizeHeight(40),
-                            width: MySize.getScaledSizeWidth(47.56),
+                            width: MySize.getScaledSizeHeight(47.56),
                             fit: BoxFit.contain,
                           ),
                         ),
@@ -828,7 +830,7 @@ class HomeView extends GetWidget<HomeController> {
                           Image.asset(
                             AppAsset.drawer6,
                             height: MySize.getScaledSizeHeight(33.75),
-                            width: MySize.getScaledSizeWidth(35.63),
+                            width: MySize.getScaledSizeHeight(35.63),
                             fit: BoxFit.contain,
                           ),
                         ),
@@ -841,7 +843,7 @@ class HomeView extends GetWidget<HomeController> {
                               Image.asset(
                                 AppAsset.drawer7,
                                 height: MySize.getScaledSizeHeight(40),
-                                width: MySize.getScaledSizeWidth(40),
+                                width: MySize.getScaledSizeHeight(40),
                                 fit: BoxFit.contain,
                               ),
                               SizedBox(
@@ -853,7 +855,7 @@ class HomeView extends GetWidget<HomeController> {
                                   textAlign: TextAlign.center,
                                   style: AppTextStyle.semiBold.copyWith(
                                     fontWeight: FontWeight.w600,
-                                    fontSize: MySize.getScaledSizeWidth(13),
+                                    fontSize: MySize.getScaledSizeHeight(13),
                                     color: AppColor.white,
                                   ),
                                 ),
@@ -872,20 +874,20 @@ class HomeView extends GetWidget<HomeController> {
                       height: MySize.getScaledSizeHeight(
                         15,
                       ),
-                      width: MySize.getScaledSizeWidth(
+                      width: MySize.getScaledSizeHeight(
                         15,
                       ),
                       fit: BoxFit.contain,
                     ),
                     SizedBox(
-                      width: MySize.getScaledSizeWidth(
+                      width: MySize.getScaledSizeHeight(
                         6,
                       ),
                     ),
                     Text(
                       AppString.settings,
                       style: AppTextStyle.medium.copyWith(
-                        fontSize: MySize.getScaledSizeWidth(
+                        fontSize: MySize.getScaledSizeHeight(
                           22,
                         ),
                         color: AppColor.grey666666,
@@ -897,7 +899,7 @@ class HomeView extends GetWidget<HomeController> {
                   controller: controller.searchController,
                   hintText: "Search",
                   hintStyle: AppTextStyle.medium.copyWith(
-                    fontSize: MySize.getScaledSizeWidth(17),
+                    fontSize: MySize.getScaledSizeHeight(17),
                     color: AppColor.grey76767A.withValues(
                       alpha: 0.6,
                     ),
@@ -906,10 +908,10 @@ class HomeView extends GetWidget<HomeController> {
                   borderColor: AppColor.transparent,
                   bottomPadding: 0.0,
                   boxShadow: false,
-                  borderRadius: MySize.getScaledSizeWidth(10),
+                  borderRadius: MySize.getScaledSizeHeight(10),
                   contentPadding: EdgeInsets.symmetric(
                     vertical: MySize.getScaledSizeHeight(12),
-                    horizontal: MySize.getScaledSizeWidth(15),
+                    horizontal: MySize.getScaledSizeHeight(15),
                   ),
                   margin: EdgeInsets.only(
                     top: MySize.getScaledSizeHeight(25),
@@ -922,7 +924,7 @@ class HomeView extends GetWidget<HomeController> {
                     child: Image.asset(
                       AppAsset.searchIcon,
                       height: MySize.getScaledSizeHeight(20.31),
-                      width: MySize.getScaledSizeWidth(20.31),
+                      width: MySize.getScaledSizeHeight(20.31),
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -933,7 +935,7 @@ class HomeView extends GetWidget<HomeController> {
                     child: Image.asset(
                       AppAsset.microphoneIcon,
                       height: MySize.getScaledSizeHeight(24),
-                      width: MySize.getScaledSizeWidth(24),
+                      width: MySize.getScaledSizeHeight(24),
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -948,7 +950,7 @@ class HomeView extends GetWidget<HomeController> {
                           AppColor.black212121,
                         ),
                         SizedBox(
-                          width: MySize.getScaledSizeWidth(15),
+                          width: MySize.getScaledSizeHeight(15),
                         ),
                         commonIconContainer(
                           AppAsset.uploadIcon,
@@ -978,11 +980,11 @@ class HomeView extends GetWidget<HomeController> {
                   : const SizedBox(),
               Container(
                 color: AppColor.white,
-                width: MySize.getScaledSizeWidth(416),
+                width: MySize.getScaledSizeHeight(416),
                 padding: EdgeInsets.only(
                   top: MySize.getScaledSizeHeight(37),
-                  left: MySize.getScaledSizeWidth(28),
-                  right: MySize.getScaledSizeWidth(28),
+                  left: MySize.getScaledSizeHeight(28),
+                  right: MySize.getScaledSizeHeight(28),
                 ),
                 // decoration: const BoxDecoration(
                 //   border: Border(
@@ -1000,20 +1002,20 @@ class HomeView extends GetWidget<HomeController> {
                           height: MySize.getScaledSizeHeight(
                             15,
                           ),
-                          width: MySize.getScaledSizeWidth(
+                          width: MySize.getScaledSizeHeight(
                             15,
                           ),
                           fit: BoxFit.contain,
                         ),
                         SizedBox(
-                          width: MySize.getScaledSizeWidth(
+                          width: MySize.getScaledSizeHeight(
                             6,
                           ),
                         ),
                         Text(
                           AppString.settings,
                           style: AppTextStyle.medium.copyWith(
-                            fontSize: MySize.getScaledSizeWidth(
+                            fontSize: MySize.getScaledSizeHeight(
                               22,
                             ),
                             color: AppColor.grey666666,
@@ -1025,7 +1027,7 @@ class HomeView extends GetWidget<HomeController> {
                       controller: controller.searchController,
                       hintText: "Search",
                       hintStyle: AppTextStyle.medium.copyWith(
-                        fontSize: MySize.getScaledSizeWidth(17),
+                        fontSize: MySize.getScaledSizeHeight(17),
                         color: AppColor.grey76767A.withValues(
                           alpha: 0.6,
                         ),
@@ -1034,10 +1036,10 @@ class HomeView extends GetWidget<HomeController> {
                       borderColor: AppColor.transparent,
                       bottomPadding: 0.0,
                       boxShadow: false,
-                      borderRadius: MySize.getScaledSizeWidth(10),
+                      borderRadius: MySize.getScaledSizeHeight(10),
                       contentPadding: EdgeInsets.symmetric(
                         vertical: MySize.getScaledSizeHeight(12),
-                        horizontal: MySize.getScaledSizeWidth(15),
+                        horizontal: MySize.getScaledSizeHeight(15),
                       ),
                       margin: EdgeInsets.only(
                         top: MySize.getScaledSizeHeight(25),
@@ -1050,7 +1052,7 @@ class HomeView extends GetWidget<HomeController> {
                         child: Image.asset(
                           AppAsset.searchIcon,
                           height: MySize.getScaledSizeHeight(20.31),
-                          width: MySize.getScaledSizeWidth(20.31),
+                          width: MySize.getScaledSizeHeight(20.31),
                           fit: BoxFit.contain,
                         ),
                       ),
@@ -1061,7 +1063,7 @@ class HomeView extends GetWidget<HomeController> {
                         child: Image.asset(
                           AppAsset.microphoneIcon,
                           height: MySize.getScaledSizeHeight(24),
-                          width: MySize.getScaledSizeWidth(24),
+                          width: MySize.getScaledSizeHeight(24),
                           fit: BoxFit.contain,
                         ),
                       ),
@@ -1076,7 +1078,7 @@ class HomeView extends GetWidget<HomeController> {
                               AppColor.black212121,
                             ),
                             SizedBox(
-                              width: MySize.getScaledSizeWidth(15),
+                              width: MySize.getScaledSizeHeight(15),
                             ),
                             commonIconContainer(
                               AppAsset.uploadIcon,
@@ -1121,7 +1123,7 @@ class HomeView extends GetWidget<HomeController> {
           padding: EdgeInsets.only(
             top: MySize.getScaledSizeHeight(12),
             bottom: MySize.getScaledSizeHeight(12),
-            left: MySize.getScaledSizeWidth(20),
+            left: MySize.getScaledSizeHeight(20),
           ),
           decoration: BoxDecoration(
             border: const Border(
@@ -1136,22 +1138,22 @@ class HomeView extends GetWidget<HomeController> {
             borderRadius: BorderRadius.only(
               topLeft: isFirst
                   ? Radius.circular(
-                      MySize.getScaledSizeWidth(12),
+                      MySize.getScaledSizeHeight(12),
                     )
                   : Radius.zero,
               topRight: isFirst
                   ? Radius.circular(
-                      MySize.getScaledSizeWidth(12),
+                      MySize.getScaledSizeHeight(12),
                     )
                   : Radius.zero,
               bottomLeft: isLast
                   ? Radius.circular(
-                      MySize.getScaledSizeWidth(12),
+                      MySize.getScaledSizeHeight(12),
                     )
                   : Radius.zero,
               bottomRight: isLast
                   ? Radius.circular(
-                      MySize.getScaledSizeWidth(12),
+                      MySize.getScaledSizeHeight(12),
                     )
                   : Radius.zero,
             ),
@@ -1161,11 +1163,11 @@ class HomeView extends GetWidget<HomeController> {
               Image.asset(
                 res['imgPath'],
                 height: MySize.getScaledSizeHeight(60),
-                width: MySize.getScaledSizeWidth(60),
+                width: MySize.getScaledSizeHeight(60),
                 fit: BoxFit.contain,
               ),
               SizedBox(
-                width: MySize.getScaledSizeWidth(24),
+                width: MySize.getScaledSizeHeight(24),
               ),
               Expanded(
                 child: Column(
@@ -1176,7 +1178,7 @@ class HomeView extends GetWidget<HomeController> {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: AppTextStyle.medium.copyWith(
-                        fontSize: MySize.getScaledSizeWidth(22),
+                        fontSize: MySize.getScaledSizeHeight(22),
                         color: AppColor.black212121,
                       ),
                     ),
@@ -1185,7 +1187,7 @@ class HomeView extends GetWidget<HomeController> {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: AppTextStyle.medium.copyWith(
-                        fontSize: MySize.getScaledSizeWidth(14),
+                        fontSize: MySize.getScaledSizeHeight(14),
                         color: AppColor.black212121,
                       ),
                     ),
@@ -1194,7 +1196,7 @@ class HomeView extends GetWidget<HomeController> {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: AppTextStyle.medium.copyWith(
-                        fontSize: MySize.getScaledSizeWidth(14),
+                        fontSize: MySize.getScaledSizeHeight(14),
                         color: AppColor.black212121,
                       ),
                     ),
@@ -1217,16 +1219,16 @@ class HomeView extends GetWidget<HomeController> {
             Image.asset(
               imgPath,
               height: MySize.getScaledSizeHeight(16),
-              width: MySize.getScaledSizeWidth(14),
+              width: MySize.getScaledSizeHeight(14),
               fit: BoxFit.contain,
             ),
             SizedBox(
-              width: MySize.getScaledSizeWidth(12),
+              width: MySize.getScaledSizeHeight(12),
             ),
             Text(
               title,
               style: AppTextStyle.semiBold.copyWith(
-                fontSize: MySize.getScaledSizeWidth(16),
+                fontSize: MySize.getScaledSizeHeight(16),
                 color: AppColor.black212121,
               ),
             ),
@@ -1240,7 +1242,7 @@ class HomeView extends GetWidget<HomeController> {
           child: Text(
             AppString.addNotes,
             style: AppTextStyle.medium.copyWith(
-              fontSize: MySize.getScaledSizeWidth(14),
+              fontSize: MySize.getScaledSizeHeight(14),
               color: AppColor.greyD2D2D2,
             ),
           ),
@@ -1257,13 +1259,13 @@ class HomeView extends GetWidget<HomeController> {
   Widget profileView(context) {
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: MySize.getScaledSizeWidth(26),
+        horizontal: MySize.getScaledSizeHeight(26),
         vertical: MySize.getScaledSizeHeight(18),
       ),
       decoration: BoxDecoration(
         color: AppColor.white,
         borderRadius: BorderRadius.circular(
-          MySize.getScaledSizeWidth(16),
+          MySize.getScaledSizeHeight(16),
         ),
       ),
       child: MediaQuery.sizeOf(context).width < 1400
@@ -1272,7 +1274,7 @@ class HomeView extends GetWidget<HomeController> {
                 Image.asset(
                   AppAsset.user1,
                   height: MySize.getScaledSizeHeight(56),
-                  width: MySize.getScaledSizeWidth(56),
+                  width: MySize.getScaledSizeHeight(56),
                   fit: BoxFit.contain,
                 ),
                 Padding(
@@ -1285,7 +1287,7 @@ class HomeView extends GetWidget<HomeController> {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: AppTextStyle.semiBold.copyWith(
-                      fontSize: MySize.getScaledSizeWidth(16),
+                      fontSize: MySize.getScaledSizeHeight(16),
                       color: AppColor.black212121,
                     ),
                   ),
@@ -1295,7 +1297,7 @@ class HomeView extends GetWidget<HomeController> {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: AppTextStyle.semiBold.copyWith(
-                    fontSize: MySize.getScaledSizeWidth(12),
+                    fontSize: MySize.getScaledSizeHeight(12),
                     color: AppColor.black212121,
                   ),
                 ),
@@ -1309,7 +1311,7 @@ class HomeView extends GetWidget<HomeController> {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: AppTextStyle.semiBold.copyWith(
-                      fontSize: MySize.getScaledSizeWidth(12),
+                      fontSize: MySize.getScaledSizeHeight(12),
                       color: AppColor.black212121,
                     ),
                   ),
@@ -1319,31 +1321,31 @@ class HomeView extends GetWidget<HomeController> {
                     bottom: MySize.getScaledSizeHeight(20),
                   ),
                   padding: EdgeInsets.symmetric(
-                    horizontal: MySize.getScaledSizeWidth(16),
+                    horizontal: MySize.getScaledSizeHeight(16),
                     vertical: MySize.getScaledSizeHeight(8),
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(
-                      MySize.getScaledSizeWidth(28),
+                      MySize.getScaledSizeHeight(28),
                     ),
                     color: AppColor.black212121,
                   ),
                   child: Text(
                     AppString.addTags,
                     style: AppTextStyle.medium.copyWith(
-                      fontSize: MySize.getScaledSizeWidth(10),
+                      fontSize: MySize.getScaledSizeHeight(10),
                       color: AppColor.white,
                     ),
                   ),
                 ),
                 Container(
                   padding: EdgeInsets.all(
-                    MySize.getScaledSizeWidth(16),
+                    MySize.getScaledSizeHeight(16),
                   ),
                   decoration: BoxDecoration(
                     color: AppColor.greyF8F8F8,
                     borderRadius: BorderRadius.circular(
-                      MySize.getScaledSizeWidth(10),
+                      MySize.getScaledSizeHeight(10),
                     ),
                   ),
                   child: MediaQuery.sizeOf(context).width < 1197
@@ -1489,14 +1491,14 @@ class HomeView extends GetWidget<HomeController> {
                         margin: EdgeInsets.only(
                           top: MySize.getScaledSizeHeight(16),
                         ),
-                        // width: MySize.getScaledSizeWidth(271),
+                        // width: MySize.getScaledSizeHeight(271),
                         padding: EdgeInsets.all(
-                          MySize.getScaledSizeWidth(16),
+                          MySize.getScaledSizeHeight(16),
                         ),
                         decoration: BoxDecoration(
                           color: AppColor.greyF8F8F8,
                           borderRadius: BorderRadius.circular(
-                            MySize.getScaledSizeWidth(10),
+                            MySize.getScaledSizeHeight(10),
                           ),
                         ),
                         child: Column(
@@ -1602,8 +1604,8 @@ class HomeView extends GetWidget<HomeController> {
                       Expanded(
                         child: Container(
                           margin: EdgeInsets.only(
-                            // left: MySize.getScaledSizeWidth(6.5),
-                            right: MySize.getScaledSizeWidth(
+                            // left: MySize.getScaledSizeHeight(6.5),
+                            right: MySize.getScaledSizeHeight(
                                 MediaQuery.sizeOf(context).width > 1146
                                     ? 6.5
                                     : 0),
@@ -1611,13 +1613,13 @@ class HomeView extends GetWidget<HomeController> {
                           ),
                           width: double.infinity,
                           padding: EdgeInsets.symmetric(
-                            vertical: MySize.getScaledSizeWidth(16),
-                            horizontal: MySize.getScaledSizeWidth(27),
+                            vertical: MySize.getScaledSizeHeight(16),
+                            horizontal: MySize.getScaledSizeHeight(27),
                           ),
                           decoration: BoxDecoration(
                             color: AppColor.greyF8F8F8,
                             borderRadius: BorderRadius.circular(
-                              MySize.getScaledSizeWidth(10),
+                              MySize.getScaledSizeHeight(10),
                             ),
                           ),
                           child: Row(
@@ -1627,20 +1629,20 @@ class HomeView extends GetWidget<HomeController> {
                                 height: MySize.getScaledSizeHeight(
                                   17,
                                 ),
-                                width: MySize.getScaledSizeWidth(
+                                width: MySize.getScaledSizeHeight(
                                   20,
                                 ),
                                 fit: BoxFit.contain,
                               ),
                               SizedBox(
-                                width: MySize.getScaledSizeWidth(
+                                width: MySize.getScaledSizeHeight(
                                   10,
                                 ),
                               ),
                               Text(
                                 AppString.noOrderedItems,
                                 style: AppTextStyle.medium.copyWith(
-                                  fontSize: MySize.getScaledSizeWidth(14),
+                                  fontSize: MySize.getScaledSizeHeight(14),
                                   color: AppColor.black212121,
                                 ),
                               ),
@@ -1653,18 +1655,18 @@ class HomeView extends GetWidget<HomeController> {
                           : Expanded(
                               child: Container(
                                 margin: EdgeInsets.only(
-                                  left: MySize.getScaledSizeWidth(6.5),
+                                  left: MySize.getScaledSizeHeight(6.5),
                                   bottom: MySize.getScaledSizeHeight(17),
                                 ),
                                 width: double.infinity,
                                 padding: EdgeInsets.symmetric(
-                                  vertical: MySize.getScaledSizeWidth(16),
-                                  horizontal: MySize.getScaledSizeWidth(27),
+                                  vertical: MySize.getScaledSizeHeight(16),
+                                  horizontal: MySize.getScaledSizeHeight(27),
                                 ),
                                 decoration: BoxDecoration(
                                   color: AppColor.greyF8F8F8,
                                   borderRadius: BorderRadius.circular(
-                                    MySize.getScaledSizeWidth(10),
+                                    MySize.getScaledSizeHeight(10),
                                   ),
                                 ),
                                 child: Row(
@@ -1674,20 +1676,21 @@ class HomeView extends GetWidget<HomeController> {
                                       height: MySize.getScaledSizeHeight(
                                         17,
                                       ),
-                                      width: MySize.getScaledSizeWidth(
+                                      width: MySize.getScaledSizeHeight(
                                         20,
                                       ),
                                       fit: BoxFit.contain,
                                     ),
                                     SizedBox(
-                                      width: MySize.getScaledSizeWidth(
+                                      width: MySize.getScaledSizeHeight(
                                         10,
                                       ),
                                     ),
                                     Text(
                                       AppString.noRecentVehicleToShow,
                                       style: AppTextStyle.medium.copyWith(
-                                        fontSize: MySize.getScaledSizeWidth(14),
+                                        fontSize:
+                                            MySize.getScaledSizeHeight(14),
                                         color: AppColor.black212121,
                                       ),
                                     ),
@@ -1704,19 +1707,19 @@ class HomeView extends GetWidget<HomeController> {
                           Expanded(
                             child: Container(
                               margin: EdgeInsets.only(
-                                // left: MySize.getScaledSizeWidth(6.5),
-                                // right: MySize.getScaledSizeWidth(6.5),
+                                // left: MySize.getScaledSizeHeight(6.5),
+                                // right: MySize.getScaledSizeHeight(6.5),
                                 bottom: MySize.getScaledSizeHeight(17),
                               ),
                               width: double.infinity,
                               padding: EdgeInsets.symmetric(
-                                vertical: MySize.getScaledSizeWidth(16),
-                                horizontal: MySize.getScaledSizeWidth(27),
+                                vertical: MySize.getScaledSizeHeight(16),
+                                horizontal: MySize.getScaledSizeHeight(27),
                               ),
                               decoration: BoxDecoration(
                                 color: AppColor.greyF8F8F8,
                                 borderRadius: BorderRadius.circular(
-                                  MySize.getScaledSizeWidth(10),
+                                  MySize.getScaledSizeHeight(10),
                                 ),
                               ),
                               child: Row(
@@ -1726,13 +1729,13 @@ class HomeView extends GetWidget<HomeController> {
                                     height: MySize.getScaledSizeHeight(
                                       17,
                                     ),
-                                    width: MySize.getScaledSizeWidth(
+                                    width: MySize.getScaledSizeHeight(
                                       20,
                                     ),
                                     fit: BoxFit.contain,
                                   ),
                                   SizedBox(
-                                    width: MySize.getScaledSizeWidth(
+                                    width: MySize.getScaledSizeHeight(
                                       10,
                                     ),
                                   ),
@@ -1740,7 +1743,8 @@ class HomeView extends GetWidget<HomeController> {
                                     child: Text(
                                       AppString.noRecentVehicleToShow,
                                       style: AppTextStyle.medium.copyWith(
-                                        fontSize: MySize.getScaledSizeWidth(14),
+                                        fontSize:
+                                            MySize.getScaledSizeHeight(14),
                                         color: AppColor.black212121,
                                       ),
                                     ),
@@ -1762,7 +1766,7 @@ class HomeView extends GetWidget<HomeController> {
                       Image.asset(
                         AppAsset.user1,
                         height: MySize.getScaledSizeHeight(56),
-                        width: MySize.getScaledSizeWidth(56),
+                        width: MySize.getScaledSizeHeight(56),
                         fit: BoxFit.contain,
                       ),
                       Padding(
@@ -1775,7 +1779,7 @@ class HomeView extends GetWidget<HomeController> {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: AppTextStyle.semiBold.copyWith(
-                            fontSize: MySize.getScaledSizeWidth(16),
+                            fontSize: MySize.getScaledSizeHeight(16),
                             color: AppColor.black212121,
                           ),
                         ),
@@ -1785,7 +1789,7 @@ class HomeView extends GetWidget<HomeController> {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: AppTextStyle.semiBold.copyWith(
-                          fontSize: MySize.getScaledSizeWidth(12),
+                          fontSize: MySize.getScaledSizeHeight(12),
                           color: AppColor.black212121,
                         ),
                       ),
@@ -1799,25 +1803,25 @@ class HomeView extends GetWidget<HomeController> {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: AppTextStyle.semiBold.copyWith(
-                            fontSize: MySize.getScaledSizeWidth(12),
+                            fontSize: MySize.getScaledSizeHeight(12),
                             color: AppColor.black212121,
                           ),
                         ),
                       ),
                       Container(
                         padding: EdgeInsets.all(
-                          MySize.getScaledSizeWidth(8),
+                          MySize.getScaledSizeHeight(8),
                         ),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(
-                            MySize.getScaledSizeWidth(28),
+                            MySize.getScaledSizeHeight(28),
                           ),
                           color: AppColor.black212121,
                         ),
                         child: Text(
                           AppString.addTags,
                           style: AppTextStyle.medium.copyWith(
-                            fontSize: MySize.getScaledSizeWidth(10),
+                            fontSize: MySize.getScaledSizeHeight(10),
                             color: AppColor.white,
                           ),
                         ),
@@ -1826,13 +1830,13 @@ class HomeView extends GetWidget<HomeController> {
                   ),
                 ),
                 SizedBox(
-                  width: MySize.getScaledSizeWidth(34),
+                  width: MySize.getScaledSizeHeight(34),
                 ),
                 Expanded(
                   flex: 5,
                   child: Container(
                     padding: EdgeInsets.only(
-                      left: MySize.getScaledSizeWidth(15),
+                      left: MySize.getScaledSizeHeight(15),
                     ),
                     decoration: const BoxDecoration(
                       color: AppColor.white,
@@ -1848,12 +1852,12 @@ class HomeView extends GetWidget<HomeController> {
                             children: [
                               Container(
                                 padding: EdgeInsets.all(
-                                  MySize.getScaledSizeWidth(16),
+                                  MySize.getScaledSizeHeight(16),
                                 ),
                                 decoration: BoxDecoration(
                                   color: AppColor.greyF8F8F8,
                                   borderRadius: BorderRadius.circular(
-                                    MySize.getScaledSizeWidth(10),
+                                    MySize.getScaledSizeHeight(10),
                                   ),
                                 ),
                                 child: Row(
@@ -1925,14 +1929,14 @@ class HomeView extends GetWidget<HomeController> {
                                       margin: EdgeInsets.only(
                                         top: MySize.getScaledSizeHeight(16),
                                       ),
-                                      // width: MySize.getScaledSizeWidth(271),
+                                      // width: MySize.getScaledSizeHeight(271),
                                       padding: EdgeInsets.all(
-                                        MySize.getScaledSizeWidth(16),
+                                        MySize.getScaledSizeHeight(16),
                                       ),
                                       decoration: BoxDecoration(
                                         color: AppColor.greyF8F8F8,
                                         borderRadius: BorderRadius.circular(
-                                          MySize.getScaledSizeWidth(10),
+                                          MySize.getScaledSizeHeight(10),
                                         ),
                                       ),
                                       child: Column(
@@ -2041,21 +2045,21 @@ class HomeView extends GetWidget<HomeController> {
                                     Expanded(
                                       child: Container(
                                         margin: EdgeInsets.only(
-                                          right: MySize.getScaledSizeWidth(6.5),
+                                          right: MySize.getScaledSizeHeight(6.5),
                                           bottom:
                                               MySize.getScaledSizeHeight(17),
                                         ),
                                         width: double.infinity,
                                         padding: EdgeInsets.symmetric(
                                           vertical:
-                                              MySize.getScaledSizeWidth(16),
+                                              MySize.getScaledSizeHeight(16),
                                           horizontal:
-                                              MySize.getScaledSizeWidth(27),
+                                              MySize.getScaledSizeHeight(27),
                                         ),
                                         decoration: BoxDecoration(
                                           color: AppColor.greyF8F8F8,
                                           borderRadius: BorderRadius.circular(
-                                            MySize.getScaledSizeWidth(10),
+                                            MySize.getScaledSizeHeight(10),
                                           ),
                                         ),
                                         child: Row(
@@ -2066,13 +2070,13 @@ class HomeView extends GetWidget<HomeController> {
                                                   MySize.getScaledSizeHeight(
                                                 17,
                                               ),
-                                              width: MySize.getScaledSizeWidth(
+                                              width: MySize.getScaledSizeHeight(
                                                 20,
                                               ),
                                               fit: BoxFit.contain,
                                             ),
                                             SizedBox(
-                                              width: MySize.getScaledSizeWidth(
+                                              width: MySize.getScaledSizeHeight(
                                                 10,
                                               ),
                                             ),
@@ -2081,7 +2085,7 @@ class HomeView extends GetWidget<HomeController> {
                                               style:
                                                   AppTextStyle.medium.copyWith(
                                                 fontSize:
-                                                    MySize.getScaledSizeWidth(
+                                                    MySize.getScaledSizeHeight(
                                                         14),
                                                 color: AppColor.black212121,
                                               ),
@@ -2093,21 +2097,21 @@ class HomeView extends GetWidget<HomeController> {
                                     Expanded(
                                       child: Container(
                                         margin: EdgeInsets.only(
-                                          left: MySize.getScaledSizeWidth(6.5),
+                                          left: MySize.getScaledSizeHeight(6.5),
                                           bottom:
                                               MySize.getScaledSizeHeight(17),
                                         ),
                                         width: double.infinity,
                                         padding: EdgeInsets.symmetric(
                                           vertical:
-                                              MySize.getScaledSizeWidth(16),
+                                              MySize.getScaledSizeHeight(16),
                                           horizontal:
-                                              MySize.getScaledSizeWidth(27),
+                                              MySize.getScaledSizeHeight(27),
                                         ),
                                         decoration: BoxDecoration(
                                           color: AppColor.greyF8F8F8,
                                           borderRadius: BorderRadius.circular(
-                                            MySize.getScaledSizeWidth(10),
+                                            MySize.getScaledSizeHeight(10),
                                           ),
                                         ),
                                         child: Row(
@@ -2118,13 +2122,13 @@ class HomeView extends GetWidget<HomeController> {
                                                   MySize.getScaledSizeHeight(
                                                 17,
                                               ),
-                                              width: MySize.getScaledSizeWidth(
+                                              width: MySize.getScaledSizeHeight(
                                                 20,
                                               ),
                                               fit: BoxFit.contain,
                                             ),
                                             SizedBox(
-                                              width: MySize.getScaledSizeWidth(
+                                              width: MySize.getScaledSizeHeight(
                                                 10,
                                               ),
                                             ),
@@ -2133,7 +2137,7 @@ class HomeView extends GetWidget<HomeController> {
                                               style:
                                                   AppTextStyle.medium.copyWith(
                                                 fontSize:
-                                                    MySize.getScaledSizeWidth(
+                                                    MySize.getScaledSizeHeight(
                                                         14),
                                                 color: AppColor.black212121,
                                               ),
@@ -2157,12 +2161,12 @@ class HomeView extends GetWidget<HomeController> {
                                   children: [
                                     Container(
                                       padding: EdgeInsets.all(
-                                        MySize.getScaledSizeWidth(16),
+                                        MySize.getScaledSizeHeight(16),
                                       ),
                                       decoration: BoxDecoration(
                                         color: AppColor.greyF8F8F8,
                                         borderRadius: BorderRadius.circular(
-                                          MySize.getScaledSizeWidth(10),
+                                          MySize.getScaledSizeHeight(10),
                                         ),
                                       ),
                                       child: Row(
@@ -2246,15 +2250,15 @@ class HomeView extends GetWidget<HomeController> {
                                               top: MySize.getScaledSizeHeight(
                                                   16),
                                             ),
-                                            // width: MySize.getScaledSizeWidth(271),
+                                            // width: MySize.getScaledSizeHeight(271),
                                             padding: EdgeInsets.all(
-                                              MySize.getScaledSizeWidth(16),
+                                              MySize.getScaledSizeHeight(16),
                                             ),
                                             decoration: BoxDecoration(
                                               color: AppColor.greyF8F8F8,
                                               borderRadius:
                                                   BorderRadius.circular(
-                                                MySize.getScaledSizeWidth(10),
+                                                MySize.getScaledSizeHeight(10),
                                               ),
                                             ),
                                             child: Column(
@@ -2377,7 +2381,7 @@ class HomeView extends GetWidget<HomeController> {
                                   children: [
                                     Container(
                                       margin: EdgeInsets.only(
-                                        left: MySize.getScaledSizeWidth(17),
+                                        left: MySize.getScaledSizeHeight(17),
                                         bottom: MySize.getScaledSizeHeight(17),
                                       ),
                                       width: double.infinity,
@@ -2385,12 +2389,12 @@ class HomeView extends GetWidget<HomeController> {
                                         vertical:
                                             MySize.getScaledSizeHeight(65),
                                         horizontal:
-                                            MySize.getScaledSizeWidth(72),
+                                            MySize.getScaledSizeHeight(72),
                                       ),
                                       decoration: BoxDecoration(
                                         color: AppColor.greyF8F8F8,
                                         borderRadius: BorderRadius.circular(
-                                          MySize.getScaledSizeWidth(10),
+                                          MySize.getScaledSizeHeight(10),
                                         ),
                                       ),
                                       child: Column(
@@ -2400,7 +2404,7 @@ class HomeView extends GetWidget<HomeController> {
                                             height: MySize.getScaledSizeHeight(
                                               26.67,
                                             ),
-                                            width: MySize.getScaledSizeWidth(
+                                            width: MySize.getScaledSizeHeight(
                                               26.67,
                                             ),
                                             fit: BoxFit.contain,
@@ -2409,7 +2413,8 @@ class HomeView extends GetWidget<HomeController> {
                                             AppString.noOrderedItems,
                                             style: AppTextStyle.medium.copyWith(
                                               fontSize:
-                                                  MySize.getScaledSizeWidth(14),
+                                                  MySize.getScaledSizeHeight(
+                                                      14),
                                               color: AppColor.black212121,
                                             ),
                                           ),
@@ -2419,18 +2424,18 @@ class HomeView extends GetWidget<HomeController> {
                                     Container(
                                       alignment: Alignment.center,
                                       margin: EdgeInsets.only(
-                                        left: MySize.getScaledSizeWidth(17),
+                                        left: MySize.getScaledSizeHeight(17),
                                       ),
                                       width: double.infinity,
                                       padding: EdgeInsets.symmetric(
-                                        vertical: MySize.getScaledSizeWidth(16),
+                                        vertical: MySize.getScaledSizeHeight(16),
                                         horizontal:
-                                            MySize.getScaledSizeWidth(27),
+                                            MySize.getScaledSizeHeight(27),
                                       ),
                                       decoration: BoxDecoration(
                                         color: AppColor.greyF8F8F8,
                                         borderRadius: BorderRadius.circular(
-                                          MySize.getScaledSizeWidth(10),
+                                          MySize.getScaledSizeHeight(10),
                                         ),
                                       ),
                                       child: Row(
@@ -2442,13 +2447,13 @@ class HomeView extends GetWidget<HomeController> {
                                             height: MySize.getScaledSizeHeight(
                                               17,
                                             ),
-                                            width: MySize.getScaledSizeWidth(
+                                            width: MySize.getScaledSizeHeight(
                                               20,
                                             ),
                                             fit: BoxFit.contain,
                                           ),
                                           SizedBox(
-                                            width: MySize.getScaledSizeWidth(
+                                            width: MySize.getScaledSizeHeight(
                                               10,
                                             ),
                                           ),
@@ -2456,7 +2461,8 @@ class HomeView extends GetWidget<HomeController> {
                                             AppString.noOrderedItems,
                                             style: AppTextStyle.medium.copyWith(
                                               fontSize:
-                                                  MySize.getScaledSizeWidth(14),
+                                                  MySize.getScaledSizeHeight(
+                                                      14),
                                               color: AppColor.black212121,
                                             ),
                                           ),
@@ -2485,16 +2491,16 @@ class HomeView extends GetWidget<HomeController> {
       bool? isNoLeftPadding = false}) {
     return Container(
       margin: EdgeInsets.only(
-        left: MySize.getScaledSizeWidth(isNoLeftPadding == true ? 0 : 17),
+        left: MySize.getScaledSizeHeight(isNoLeftPadding == true ? 0 : 17),
       ),
       padding: EdgeInsets.symmetric(
-        horizontal: MySize.getScaledSizeWidth(13),
+        horizontal: MySize.getScaledSizeHeight(13),
         vertical: MySize.getScaledSizeHeight(14),
       ),
       decoration: BoxDecoration(
         color: AppColor.greyF8F8F8,
         borderRadius: BorderRadius.circular(
-          MySize.getScaledSizeWidth(12),
+          MySize.getScaledSizeHeight(12),
         ),
       ),
       child: Column(
@@ -2503,7 +2509,7 @@ class HomeView extends GetWidget<HomeController> {
           Text(
             title,
             style: AppTextStyle.medium.copyWith(
-              fontSize: MySize.getScaledSizeWidth(14),
+              fontSize: MySize.getScaledSizeHeight(14),
               color: AppColor.black212121,
             ),
           ),
@@ -2529,12 +2535,12 @@ class HomeView extends GetWidget<HomeController> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: MySize.getScaledSizeWidth(20),
+                  horizontal: MySize.getScaledSizeHeight(20),
                 ),
                 child: Column(
                   children: [
                     SizedBox(
-                      height: MySize.getScaledSizeWidth(48),
+                      height: MySize.getScaledSizeHeight(48),
                       child: const VerticalDivider(
                         color: AppColor.greyD6D6D6,
                       ),
@@ -2543,7 +2549,7 @@ class HomeView extends GetWidget<HomeController> {
                       height: MySize.getScaledSizeHeight(9),
                     ),
                     SizedBox(
-                      height: MySize.getScaledSizeWidth(48),
+                      height: MySize.getScaledSizeHeight(48),
                       child: const VerticalDivider(
                         color: AppColor.greyD6D6D6,
                       ),
@@ -2583,7 +2589,7 @@ class HomeView extends GetWidget<HomeController> {
             Text(
               title,
               style: AppTextStyle.medium.copyWith(
-                fontSize: MySize.getScaledSizeWidth(14),
+                fontSize: MySize.getScaledSizeHeight(14),
                 color: AppColor.black212121,
               ),
             ),
@@ -2591,7 +2597,7 @@ class HomeView extends GetWidget<HomeController> {
                 ? Image.asset(
                     imgPath,
                     height: MySize.getScaledSizeHeight(13.13),
-                    width: MySize.getScaledSizeWidth(12.5),
+                    width: MySize.getScaledSizeHeight(12.5),
                     fit: BoxFit.contain,
                   )
                 : const SizedBox(),
@@ -2600,7 +2606,7 @@ class HomeView extends GetWidget<HomeController> {
         Text(
           text,
           style: AppTextStyle.semiBold.copyWith(
-            fontSize: MySize.getScaledSizeWidth(18),
+            fontSize: MySize.getScaledSizeHeight(18),
             color: color ?? AppColor.black212121,
           ),
         ),
@@ -2619,18 +2625,18 @@ class HomeView extends GetWidget<HomeController> {
           title,
           style: AppTextStyle.semiBold.copyWith(
             fontWeight: FontWeight.w600,
-            fontSize: MySize.getScaledSizeWidth(16),
+            fontSize: MySize.getScaledSizeHeight(16),
             color: AppColor.black212121,
           ),
         ),
         SizedBox(
-          height: MySize.getScaledSizeWidth(12),
+          height: MySize.getScaledSizeHeight(12),
         ),
         Text(
           subTitle,
           style: AppTextStyle.medium.copyWith(
             fontWeight: FontWeight.w500,
-            fontSize: MySize.getScaledSizeWidth(12),
+            fontSize: MySize.getScaledSizeHeight(12),
             color: AppColor.black212121,
           ),
         ),
@@ -2643,19 +2649,19 @@ class HomeView extends GetWidget<HomeController> {
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(
-          MySize.getScaledSizeWidth(6),
+          MySize.getScaledSizeHeight(6),
         ),
       ),
       // height: MySize.getScaledSizeHeight(28),
-      // width: MySize.getScaledSizeWidth(28),
+      // width: MySize.getScaledSizeHeight(28),
       padding: EdgeInsets.symmetric(
         vertical: MySize.getScaledSizeHeight(7),
-        horizontal: MySize.getScaledSizeWidth(6),
+        horizontal: MySize.getScaledSizeHeight(6),
       ),
       child: Image.asset(
         imagePath,
         height: MySize.getScaledSizeHeight(15),
-        width: MySize.getScaledSizeWidth(15),
+        width: MySize.getScaledSizeHeight(15),
         fit: BoxFit.contain,
       ),
     );
@@ -2663,9 +2669,9 @@ class HomeView extends GetWidget<HomeController> {
 
   Container drawerView() {
     return Container(
-      width: MySize.getScaledSizeWidth(60),
+      width: MySize.getScaledSizeHeight(60),
       padding: EdgeInsets.symmetric(
-        horizontal: MySize.getScaledSizeWidth(10),
+        horizontal: MySize.getScaledSizeHeight(10),
       ),
       color: AppColor.black,
       child: Column(
@@ -2674,7 +2680,7 @@ class HomeView extends GetWidget<HomeController> {
             Image.asset(
               AppAsset.drawer1,
               height: MySize.getScaledSizeHeight(20.33),
-              width: MySize.getScaledSizeWidth(49.28),
+              width: MySize.getScaledSizeHeight(49.28),
               fit: BoxFit.contain,
             ),
           ),
@@ -2682,7 +2688,7 @@ class HomeView extends GetWidget<HomeController> {
             Image.asset(
               AppAsset.drawer2,
               height: MySize.getScaledSizeHeight(36.37),
-              width: MySize.getScaledSizeWidth(40),
+              width: MySize.getScaledSizeHeight(40),
               fit: BoxFit.contain,
             ),
           ),
@@ -2690,7 +2696,7 @@ class HomeView extends GetWidget<HomeController> {
             Image.asset(
               AppAsset.drawer3,
               height: MySize.getScaledSizeHeight(40),
-              width: MySize.getScaledSizeWidth(40),
+              width: MySize.getScaledSizeHeight(40),
               fit: BoxFit.contain,
             ),
           ),
@@ -2698,7 +2704,7 @@ class HomeView extends GetWidget<HomeController> {
             Image.asset(
               AppAsset.drawer4,
               height: MySize.getScaledSizeHeight(32.66),
-              width: MySize.getScaledSizeWidth(40),
+              width: MySize.getScaledSizeHeight(40),
               fit: BoxFit.contain,
             ),
           ),
@@ -2706,7 +2712,7 @@ class HomeView extends GetWidget<HomeController> {
             Image.asset(
               AppAsset.drawer5,
               height: MySize.getScaledSizeHeight(40),
-              width: MySize.getScaledSizeWidth(47.56),
+              width: MySize.getScaledSizeHeight(47.56),
               fit: BoxFit.contain,
             ),
           ),
@@ -2714,7 +2720,7 @@ class HomeView extends GetWidget<HomeController> {
             Image.asset(
               AppAsset.drawer6,
               height: MySize.getScaledSizeHeight(33.75),
-              width: MySize.getScaledSizeWidth(35.63),
+              width: MySize.getScaledSizeHeight(35.63),
               fit: BoxFit.contain,
             ),
           ),
@@ -2724,7 +2730,7 @@ class HomeView extends GetWidget<HomeController> {
                 Image.asset(
                   AppAsset.drawer7,
                   height: MySize.getScaledSizeHeight(40),
-                  width: MySize.getScaledSizeWidth(40),
+                  width: MySize.getScaledSizeHeight(40),
                   fit: BoxFit.contain,
                 ),
                 SizedBox(
@@ -2736,7 +2742,7 @@ class HomeView extends GetWidget<HomeController> {
                     textAlign: TextAlign.center,
                     style: AppTextStyle.semiBold.copyWith(
                       fontWeight: FontWeight.w600,
-                      fontSize: MySize.getScaledSizeWidth(13),
+                      fontSize: MySize.getScaledSizeHeight(13),
                       color: AppColor.white,
                     ),
                   ),
@@ -2763,7 +2769,7 @@ class HomeView extends GetWidget<HomeController> {
       padding: EdgeInsets.only(
         top: MySize.getScaledSizeHeight(8.33),
         bottom: MySize.getScaledSizeHeight(8.33),
-        left: MySize.getScaledSizeWidth(10),
+        left: MySize.getScaledSizeHeight(10),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -2779,54 +2785,55 @@ class HomeView extends GetWidget<HomeController> {
                 child: Image.asset(
                   AppAsset.menuIcon,
                   height: MySize.getScaledSizeHeight(
-                      MediaQuery.sizeOf(context).width <= 450 ? 25 : 20),
-                  width: MySize.getScaledSizeWidth(
-                      MediaQuery.sizeOf(context).width <= 450 ? 25 : 30),
+                      MediaQuery.sizeOf(context).width <= 800 ? 25 : 20),
+                  width: MySize.getScaledSizeHeight(
+                      MediaQuery.sizeOf(context).width <= 800 ? 25 : 30),
                   fit: BoxFit.contain,
                 ),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: MySize.getScaledSizeWidth(
-                      MediaQuery.sizeOf(context).width <= 450 ? 20 : 28),
+                  horizontal: MySize.getScaledSizeHeight(
+                      MediaQuery.sizeOf(context).width <= 800 ? 20 : 28),
                 ),
                 child: Image.asset(
                   AppAsset.shapeArrow,
                   height: MySize.getScaledSizeHeight(
-                      MediaQuery.sizeOf(context).width <= 450 ? 25 : 23.33),
-                  width: MySize.getScaledSizeWidth(
-                      MediaQuery.sizeOf(context).width <= 450 ? 25 : 30),
+                      MediaQuery.sizeOf(context).width <= 800 ? 25 : 23.33),
+                  width: MySize.getScaledSizeHeight(
+                      MediaQuery.sizeOf(context).width <= 800 ? 25 : 30),
                   fit: BoxFit.contain,
                 ),
               ),
               Image.asset(
                 AppAsset.profileIcon,
                 height: MySize.getScaledSizeHeight(
-                    MediaQuery.sizeOf(context).width <= 450 ? 25 : 40),
-                width: MySize.getScaledSizeWidth(
-                    MediaQuery.sizeOf(context).width <= 450 ? 25 : 40),
+                    MediaQuery.sizeOf(context).width <= 800 ? 25 : 40),
+                width: MySize.getScaledSizeHeight(
+                    MediaQuery.sizeOf(context).width <= 800 ? 25 : 40),
                 fit: BoxFit.contain,
               ),
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: MySize.getScaledSizeWidth(12),
+                  horizontal: MySize.getScaledSizeHeight(12),
                 ),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       AppString.johnsonFrancisco,
                       style: AppTextStyle.semiBold.copyWith(
                         fontWeight: FontWeight.w700,
-                        fontSize: MySize.getScaledSizeWidth(
-                            MediaQuery.sizeOf(context).width <= 450 ? 16 : 21),
+                        fontSize: MySize.getScaledSizeHeight(
+                            MediaQuery.sizeOf(context).width <= 800 ? 16 : 21),
                         color: AppColor.white,
                       ),
                     ),
-                    MediaQuery.sizeOf(context).width < 700
+                    MediaQuery.sizeOf(context).width <= 800
                         ? Text(
                             AppString.clockInTime,
                             style: AppTextStyle.semiBold.copyWith(
-                              fontSize: MySize.getScaledSizeWidth(
+                              fontSize: MySize.getScaledSizeHeight(
                                   MediaQuery.sizeOf(context).width <= 450
                                       ? 14
                                       : 18),
@@ -2837,53 +2844,58 @@ class HomeView extends GetWidget<HomeController> {
                   ],
                 ),
               ),
-              MediaQuery.sizeOf(context).width < 700
+              MediaQuery.sizeOf(context).width <= 800
                   ? const SizedBox()
                   : Text(
                       AppString.clockInTime,
                       style: AppTextStyle.semiBold.copyWith(
-                        fontSize: MySize.getScaledSizeWidth(18),
+                        fontSize: MySize.getScaledSizeHeight(18),
                         color: AppColor.white,
                       ),
                     ),
             ],
           ),
           SizedBox(
-            width: MySize.getScaledSizeWidth(
-                MediaQuery.sizeOf(context).width <= 450 ? 0 : 50),
+            width: MySize.getScaledSizeHeight(
+                MediaQuery.sizeOf(context).width <= 800 ? 0 : 50),
           ),
           Row(
             children: [
-              MediaQuery.sizeOf(context).width < 950
+              MediaQuery.sizeOf(context).width <= 950
                   ? const SizedBox()
                   : Text(
                       AppString.clockTime,
                       style: AppTextStyle.semiBold.copyWith(
                         fontWeight: FontWeight.w700,
-                        fontSize: MySize.getScaledSizeWidth(21),
+                        fontSize: MySize.getScaledSizeHeight(21),
                         color: AppColor.white,
                       ),
                     ),
-              MediaQuery.sizeOf(context).width < 950
+              MediaQuery.sizeOf(context).width <= 950
                   ? const SizedBox()
                   : Padding(
                       padding: EdgeInsets.symmetric(
-                        horizontal: MySize.getScaledSizeWidth(40),
+                        horizontal: MySize.getScaledSizeHeight(40),
                       ),
                       child: Image.asset(
                         AppAsset.wifiIcon,
                         height: MySize.getScaledSizeHeight(40),
-                        width: MySize.getScaledSizeWidth(40),
+                        width: MySize.getScaledSizeHeight(40),
                         fit: BoxFit.contain,
                       ),
                     ),
-              Image.asset(
-                AppAsset.notificationIcon,
-                height: MySize.getScaledSizeHeight(
-                    MediaQuery.sizeOf(context).width <= 450 ? 25 : 40),
-                width: MySize.getScaledSizeWidth(
-                    MediaQuery.sizeOf(context).width <= 450 ? 25 : 40),
-                fit: BoxFit.contain,
+              Padding(
+                padding: EdgeInsets.only(
+                    right: MySize.getScaledSizeHeight(
+                        MediaQuery.sizeOf(context).width <= 800 ? 8 : 10)),
+                child: Image.asset(
+                  AppAsset.notificationIcon,
+                  height: MySize.getScaledSizeHeight(
+                      MediaQuery.sizeOf(context).width <= 800 ? 25 : 40),
+                  width: MySize.getScaledSizeHeight(
+                      MediaQuery.sizeOf(context).width <= 800 ? 25 : 40),
+                  fit: BoxFit.contain,
+                ),
               ),
             ],
           )
